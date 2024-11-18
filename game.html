@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记忆力小游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .game-title {
+            font-size: 2rem;
+            color: #333;
+        }
+        .game-instructions {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #555;
+            text-align: center;
+        }
+        .start-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .start-button:hover {
+            background-color: #218838;
+        }
+        .game-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .progress {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .progress div {
+            width: 20px;
+            height: 20px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+        }
+        .progress .correct {
+            background-color: green;
+        }
+        .progress .incorrect {
+            background-color: red;
+        }
+        .number-display {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input-container input {
+            padding: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="game-title">记忆力锻炼小游戏</div>
+        <div class="game-instructions">
+            游戏规则：<br>
+            1. 每一关会显示一个数字，数字的位数从1位到20位递增。<br>
+            2. 你有5秒时间记住数字，之后输入你记住的数字。<br>
+            3. 答对每关得分不同，总分越高越优秀！
+        </div>
+        <button class="start-button" onclick="startGame()">开始游戏</button>
+    </div>
+    <div class="game-container">
+        <div class="progress"></div>
+        <div class="number-display"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="输入数字">
+            <button class="submit-button" onclick="submitAnswer()">提交</button>
+        </div>
+        <div class="result"></div>
+    </div>
+    <script>
+        const progressContainer = document.querySelector('.progress');
+        const numberDisplay = document.querySelector('.number-display');
+        const inputContainer = document.querySelector('.input-container');
+        const userInput = document.getElementById('user-input');
+        const resultDisplay = document.querySelector('.result');
+        const gameContainer = document.querySelector('.game-container');
+        
+        let currentLevel = 0;
+        let currentNumber = '';
+        let score = 0;
+
+        function startGame() {
+            document.querySelector('.header').style.display = 'none';
+            gameContainer.style.display = 'flex';
+            initProgress();
+            nextLevel();
+        }
+
+        function initProgress() {
+            progressContainer.innerHTML = '';
+            for (let i = 0; i < 20; i++) {
+                const cell = document.createElement('div');
+                progressContainer.appendChild(cell);
+            }
+        }
+
+        function nextLevel() {
+            if (currentLevel >= 20) {
+                endGame();
+                return;
+            }
+            currentLevel++;
+            currentNumber = generateNumber(currentLevel);
+            numberDisplay.textContent = currentNumber;
+            userInput.value = '';
+            inputContainer.style.display = 'none';
+            resultDisplay.textContent = '';
+
+            setTimeout(() => {
+                numberDisplay.textContent = '';
+                inputContainer.style.display = 'flex';
+            }, 5000);
+        }
+
+        function generateNumber(level) {
+            let number = '';
+            for (let i = 0; i < level; i++) {
+                number += Math.floor(Math.random() * 10);
+            }
+            return number;
+        }
+
+        function submitAnswer() {
+            const answer = userInput.value;
+            const cell = progressContainer.children[currentLevel - 1];
+
+            if (answer === currentNumber) {
+                score += currentLevel * 5;
+                cell.classList.add('correct');
+            } else {
+                cell.classList.add('incorrect');
+            }
+
+            nextLevel();
+        }
+
+        function endGame() {
+            gameContainer.style.display = 'none';
+            document.querySelector('.header').style.display = 'flex';
+            const grade = score >= 840 ? '优秀' : '继续加油';
+            document.querySelector('.game-instructions').innerHTML = `游戏结束！<br>总分：${score}<br>评级：${grade}`;
+        }
+    </script>
+</body>
+</html>
