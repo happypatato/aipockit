@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Test and improve your memory with our fun and interactive Memory Test game. Challenge yourself across 20 levels and track your progress.">
-    <meta name="keywords" content="Memory Test, Brain Game, Memory Improvement, Cognitive Challenge, Online Game">
-    <meta name="author" content="AIPockit">
-    <title>Memory Test Game - Improve Your Cognitive Skills</title>
+    <meta name="description" content="Create your custom neon sign by entering text and choosing colors. Preview your design in real time!">
+    <title>Neon Sign Customizer</title>
     <style>
         * {
             margin: 0;
@@ -15,122 +13,96 @@
         }
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        header {
-            background-color: #007bff;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
             color: #fff;
-            padding: 20px;
             text-align: center;
         }
+        header {
+            background: #333;
+            padding: 20px;
+        }
         header h1 {
+            margin: 0;
             font-size: 2.5rem;
         }
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
             padding: 20px;
         }
-        .section {
-            margin-bottom: 40px;
+        .form-group {
+            margin-bottom: 20px;
         }
-        .section h2 {
-            color: #007bff;
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-        .iframe-container {
-            width: 100%;
-            height: 600px;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            background-color: #343a40;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-        footer a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .cta-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
+        label {
+            display: block;
             font-size: 1.2rem;
-            color: #fff;
-            background-color: #28a745;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
             border: none;
             border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
         }
-        .cta-button:hover {
-            background-color: #218838;
+        input[type="color"] {
+            margin: 10px 0;
+            padding: 5px;
+            border: none;
+        }
+        .neon-preview {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #111;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+        .neon-text {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px #fff, 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Memory Test Game</h1>
-        <p>Challenge Your Memory and Boost Your Brain Power!</p>
+        <h1>Neon Sign Customizer</h1>
+        <p>Create your own neon sign with custom text and colors!</p>
     </header>
 
     <div class="container">
-        <section class="section">
-            <h2>About the Memory Test Game</h2>
-            <p>The Memory Test is a fun and interactive game designed to improve your memory and cognitive skills. With 20 exciting levels, this game challenges you to memorize numbers of increasing length and input them correctly to score points.</p>
-        </section>
+        <div class="form-group">
+            <label for="neonText">Enter your text:</label>
+            <input type="text" id="neonText" placeholder="Type your neon sign text here">
+        </div>
 
-        <section class="section">
-            <h2>How to Play</h2>
-            <ul>
-                <li>Each level displays a number for 5 seconds. The number increases in length as you progress, starting from 1 digit and going up to 20 digits.</li>
-                <li>Memorize the number before the timer runs out.</li>
-                <li>After the timer ends, input the number into the provided box and submit your answer.</li>
-                <li>Your performance will be tracked across 20 levels, with each level worth increasing points.</li>
-            </ul>
-        </section>
+        <div class="form-group">
+            <label for="neonColor">Choose neon color:</label>
+            <input type="color" id="neonColor" value="#ff007f">
+        </div>
 
-        <section class="section">
-            <h2>Scoring System</h2>
-            <p>Earn points based on the level you complete:</p>
-            <ul>
-                <li>Level 1: 5 points</li>
-                <li>Level 2: 10 points</li>
-                <li>Level 20: 100 points</li>
-            </ul>
-            <p>The maximum score is 1050 points. Achieve 840 points or more to earn an \"Excellent\" rating!</p>
-        </section>
-
-        <section class="section">
-            <h2>Play the Game</h2>
-            <p>Click the button below to start testing your memory now!</p>
-            <iframe src="https://aipockit.com/game.html" class="iframe-container" title="Memory Test Game"></iframe>
-        </section>
-
-        <section class="section">
-            <h2>Benefits of Playing Memory Games</h2>
-            <ul>
-                <li>Enhances short-term and long-term memory.</li>
-                <li>Boosts focus and attention span.</li>
-                <li>Improves cognitive functions and brain agility.</li>
-                <li>Provides a fun and engaging mental workout.</li>
-            </ul>
-            <a href="https://aipockit.com/game.html" class="cta-button">Play Now</a>
-        </section>
+        <div class="form-group">
+            <label>Preview:</label>
+            <div class="neon-preview">
+                <span id="previewText" class="neon-text" style="color: #ff007f;">Your Neon Text</span>
+            </div>
+        </div>
     </div>
 
-    <footer>
-        <p>© 2024 AIPockit. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-    </footer>
+    <script>
+        const neonTextInput = document.getElementById('neonText');
+        const neonColorInput = document.getElementById('neonColor');
+        const previewText = document.getElementById('previewText');
+
+        // Update text preview
+        neonTextInput.addEventListener('input', () => {
+            previewText.textContent = neonTextInput.value || "Your Neon Text";
+        });
+
+        // Update color preview
+        neonColorInput.addEventListener('input', () => {
+            previewText.style.color = neonColorInput.value;
+        });
+    </script>
 </body>
 </html>
